@@ -48,10 +48,10 @@ var readFileAndMakeItFunny = function(filePath, callback) {
       return callback(err);
     } else {
       var funnyFile = file.split('\n')
-      .map(function(line) {
-        return line + ' lol';
-      })
-      .join('\n');
+        .map(function(line) {
+          return line + ' lol';
+        })
+        .join('\n');
       callback(err, funnyFile);
     }
   });
