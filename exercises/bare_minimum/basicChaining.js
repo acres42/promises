@@ -16,19 +16,19 @@ var pluck = require('./promiseConstructor.js');
 
 var fetchProfileAndWriteToFile = function(readFilePath, writeFilePath) {
   return pluck.pluckFirstLineFromFileAsync(readFilePath)
-  .then((user)=>{
-    if(!user){
-      throw new Error('no user found!');
-    } else {
-      return user;
-    }
-  })
-  .then((newUser) => {
-    return getGitHub.getGitHubProfileAsync(newUser);
-  })
-  .then((githubProfile) => {
-    return fs.writeFileAsync(writeFilePath, JSON.stringify(githubProfile));
-  });
+    .then((user)=>{
+      if (!user) {
+        throw new Error('no user found!');
+      } else {
+        return user;
+      }
+    })
+    .then((newUser) => {
+      return getGitHub.getGitHubProfileAsync(newUser);
+    })
+    .then((githubProfile) => {
+      return fs.writeFileAsync(writeFilePath, JSON.stringify(githubProfile));
+    });
 };
 
 // Export these functions so we can test them
