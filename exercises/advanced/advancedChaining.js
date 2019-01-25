@@ -25,6 +25,12 @@ var lib = require('../../lib/advancedChainingLib');
 // the `Predict on Public and Custom Models` scope
 
 var searchCommonConceptsFromGitHubProfiles = function (githubHandles) {
+  var arr = githubHandles.map((handle) => lib.getGitHubProfile(handle));
+  return Promise.all(arr)
+    .then((handles) => handles.map((handle) => handle.avatarUrl))
+    .then((urls) => Promise.all(urls.map((url) => lib.predictImage(url))))
+    .then((tags) => lib.getIntersection(tags));
+
 };
 
 // Export these functions so we can unit test them
